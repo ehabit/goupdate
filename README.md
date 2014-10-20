@@ -1,4 +1,4 @@
-# goupdate will update all your Go packages
+# goupdate will update all of your Go packages
 
 This is a simple tool for updating all of your Go packages. 
 
