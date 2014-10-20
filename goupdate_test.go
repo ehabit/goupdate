@@ -12,7 +12,7 @@ func TestIsDir(t *testing.T) {
 
 	// test
 	if !IsDir("tmp") {
-		t.Error("IsDir returned false for directory tmp")
+		t.Error("IsDir() returned false for directory tmp")
 	}
 
 	// cleanUp
@@ -25,7 +25,7 @@ func TestIsDir(t *testing.T) {
 func TestIsGoFile(t *testing.T) {
 	filename := "test.go"
 	if !IsGoFile(filename) {
-		t.Error("IsGoFile returned false for filename test.go")
+		t.Error("IsGoFile() returned false for filename test.go")
 	}
 }
 
@@ -46,7 +46,7 @@ func TestParseFilenames(t *testing.T) {
 	// test
 	filenames := ParseFilenames(currentDirectory + "/tmp")
 	if !reflect.DeepEqual(filenames, test_data) {
-		t.Error("ParseFilenames did not return expected value.")
+		t.Error("ParseFilenames() did not return expected value.")
 	}
 
 	// cleanUp
@@ -79,7 +79,7 @@ func TestCheckDirForGo(t *testing.T) {
 
 	// test
 	if !CheckDirForGo(currentDirectory + "/tmp") {
-		t.Error("CheckDirForGo did not properly identify a directory with a .go file in it.")
+		t.Error("CheckDirForGo() did not properly identify a directory with a .go file in it.")
 	}
 
 	// cleanUp
