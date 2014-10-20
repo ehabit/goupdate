@@ -148,12 +148,12 @@ func UpdatePackagesOnHosts(hosts []string) {
 	}
 }
 
-func UpdateCount() int {
+func GetUpdateCount() int {
 	return packagesUpdated
 }
 
 func ReportUpdateStats() {
-	fmt.Println("Total packages updated:", UpdateCount())
+	fmt.Println("Total packages updated:", GetUpdateCount())
 	fmt.Println("Total package update errors:", len(problemPackages))
 	for i, pack := range problemPackages {
 		fmt.Println(i+1, pack)
