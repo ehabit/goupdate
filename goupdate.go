@@ -100,6 +100,7 @@ func UpdatePackages(hostPath string) {
 
 	userPaths := ParseFilenames(hostPath)
 	for _, user := range userPaths {
+		// one directory deep
 		packagePaths := ParseFilenames(hostPath + "/" + user)
 		if hostPath == GOPKGPATH {
 			path := hostPath + "/" + user
@@ -108,14 +109,16 @@ func UpdatePackages(hostPath string) {
 			}
 		}
 		for _, pack := range packagePaths {
+			// two directories deep
 			if hostPath == GOOGLECODEPATH {
 				subpackPaths := ParseFilenames(hostPath + "/" + user + "/" + pack)
 				for _, subpack := range subpackPaths {
+					// three directories deep
 					path := hostPath + "/" + user + "/" + pack + "/" + subpack
 					if CheckDirForGo(path) {
 						paths <- path
 					} else {
-						// check one directory deeper
+						// four directories deep
 						supSubPaths := ParseFilenames(path)
 						for _, supSubPath := range supSubPaths {
 							if CheckDirForGo(path + "/" + supSubPath) {
@@ -142,7 +145,7 @@ func UpdateCount() int {
 }
 
 func main() {
-	fmt.Println("Updating Go packages hosted on github.com, bitbucket.org, code.google.com and gopkg.in")
+	fmt.Println("Updating Go packages hosted on github.com, bitbucket.org, code.google.com and gopkg.in.")
 	for _, host := range HOSTS {
 		UpdatePackages(host)
 	}
