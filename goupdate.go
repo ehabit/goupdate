@@ -70,17 +70,20 @@ func CheckDirForGo(path string) bool {
 	return false
 }
 
-func UpdatePackage(path string) {
+func UpdatePackage(path string) bool {
 	if IsDir(path) {
 		err := sh.Command("go", "get", "-u", sh.Dir(path)).Run()
 		if err != nil {
 			problemPackages = append(problemPackages, path+" "+err.Error())
 			fmt.Println("Package not updated:", path, err)
-		} else {
-			packagesUpdated += 1
-			fmt.Println("Updated package:", path)
+			return false
 		}
+
+		packagesUpdated += 1
+		fmt.Println("Updated package:", path)
+		return true
 	}
+	return false
 }
 
 func UpdatePackages(hostPath string) {
@@ -148,12 +151,12 @@ func UpdatePackagesOnHosts(hosts []string) {
 	}
 }
 
-func GetUpdateCount() int {
+func getUpdateCount() int {
 	return packagesUpdated
 }
 
-func ReportUpdateStats() {
-	fmt.Println("Total packages updated:", GetUpdateCount())
+func reportUpdateStats() {
+	fmt.Println("Total packages updated:", getUpdateCount())
 	fmt.Println("Total package update errors:", len(problemPackages))
 	for i, pack := range problemPackages {
 		fmt.Println(i+1, pack)
@@ -163,7 +166,7 @@ func ReportUpdateStats() {
 func main() {
 	UpdatePackagesOnHosts(HOSTS)
 
-	fmt.Println("\nWe have updated every G-bomb package we could find.\nGood luck out there you sexy gopher!\n")
+	fmt.Println("\n  We have updated every G-bomb package we could find.\n  Good luck out there you sexy gopher!\n")
 
-	ReportUpdateStats()
+	reportUpdateStats()
 }
