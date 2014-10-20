@@ -71,7 +71,6 @@ func TestCheckDirForGo(t *testing.T) {
 	os.Mkdir("tmp", 0777)
 
 	os.Create("tmp/test.go")
-	os.Create("tmp/test2.md")
 
 	currentDirectory, err := os.Getwd()
 	if err != nil {
@@ -87,11 +86,6 @@ func TestCheckDirForGo(t *testing.T) {
 	err = os.Remove("tmp/test.go")
 	if err != nil {
 		t.Error("An error occured trying to remove tmp/test.go,", err)
-	}
-
-	err = os.Remove("tmp/test2.md")
-	if err != nil {
-		t.Error("An error occured trying to remove tmp/test2.md,", err)
 	}
 
 	err = os.Remove("tmp")
