@@ -34,9 +34,9 @@ func TestParseFilenames(t *testing.T) {
 	os.Mkdir("tmp", 0777)
 
 	os.Create("tmp/test.txt")
-	// os.Create("tmp/test2.md")
+	os.Create("tmp/test2.md")
 
-	test_data := []string{"test.txt"}
+	test_data := []string{"test.txt", "test2.md"}
 
 	currentDirectory, err := os.Getwd()
 	if err != nil {
@@ -52,6 +52,11 @@ func TestParseFilenames(t *testing.T) {
 	err = os.Remove("tmp/test.txt")
 	if err != nil {
 		t.Error("An error occured trying to remove tmp/test.txt,", err)
+	}
+
+	err = os.Remove("tmp/test2.md")
+	if err != nil {
+		t.Error("An error occured trying to remove tmp/test2.md,", err)
 	}
 
 	err = os.Remove("tmp")
