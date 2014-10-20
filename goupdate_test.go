@@ -103,7 +103,3 @@ func TestCheckDirForGo(t *testing.T) {
 // func TestUpdatePackage(t *testing.T) {
 
 // }
-
-// func TestGetUpdateCount(t *testing.T) {
-
-// }
