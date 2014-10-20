@@ -1,5 +1,5 @@
 // GoUpdate written by Glen Baker glen@ehab.it
-// GoUpdate protected under MIT License for Open Source Software.
+// GoUpdate is protected under MIT License for Open Source Software.
 
 package main
 
