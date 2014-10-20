@@ -31,12 +31,10 @@ var problemPackages []string
 func IsDir(path string) bool {
 	f, err := os.Stat(path)
 	if err != nil {
-		if os.IsNotExist(err) {
-			return false
-		} else {
+		if !os.IsNotExist(err) {
 			fmt.Println(err)
-			return false
 		}
+		return false
 	}
 
 	if f.IsDir() {
