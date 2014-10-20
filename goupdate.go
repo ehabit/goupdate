@@ -26,6 +26,7 @@ var HOSTS = []string{
 }
 
 var packagesUpdated int
+var problemPackages []string
 
 func IsDir(path string) bool {
 	f, err := os.Stat(path)
@@ -75,6 +76,7 @@ func UpdatePackage(path string) {
 	if IsDir(path) {
 		err := sh.Command("go", "get", "-u", sh.Dir(path)).Run()
 		if err != nil {
+			problemPackages = append(problemPackages, path+" "+err.Error())
 			fmt.Println("Package not updated:", path, err)
 		} else {
 			packagesUpdated += 1
@@ -140,15 +142,30 @@ func UpdatePackages(hostPath string) {
 	wg.Wait()
 }
 
+func UpdatePackagesOnHosts(hosts []string) {
+	fmt.Println("Updating Go packages hosted on github.com, bitbucket.org, code.google.com and gopkg.in")
+
+	for _, host := range hosts {
+		UpdatePackages(host)
+	}
+}
+
 func UpdateCount() int {
 	return packagesUpdated
 }
 
-func main() {
-	fmt.Println("Updating Go packages hosted on github.com, bitbucket.org, code.google.com and gopkg.in.")
-	for _, host := range HOSTS {
-		UpdatePackages(host)
-	}
-
+func ReportUpdateStats() {
 	fmt.Println("Total packages updated:", UpdateCount())
+	fmt.Println("Total package update errors:", len(problemPackages))
+	for i, pack := range problemPackages {
+		fmt.Println(i+1, pack)
+	}
+}
+
+func main() {
+	UpdatePackagesOnHosts(HOSTS)
+
+	fmt.Println("\nWe have updated every G-bomb package we could find.\nGood luck out there you sexy gopher!\n")
+
+	ReportUpdateStats()
 }
