@@ -152,8 +152,8 @@ func UpdatePackagesOnHosts(hosts []string) {
 }
 
 func reportUpdateStats() {
-	fmt.Println("Total packages updated:", packagesUpdated)
-	fmt.Println("Total package update errors:", len(problemPackages))
+	fmt.Println("'go get -u' ran successfully on", packagesUpdated, "packages.")
+	fmt.Println("'go get -u' raised errors trying to update", len(problemPackages), "packages.")
 	for i, pack := range problemPackages {
 		fmt.Println(i+1, pack)
 	}
