@@ -94,9 +94,10 @@ func TestCheckDirForGo(t *testing.T) {
 	}
 }
 
-// wercker manual remove and clone build step required for this test
-// wercker does need keep version control information on its cloned go packages by default
-// and errors on wercker go get -u without the git clone build step step
+// Wercker seems to remove version control when it clones packages in its default build step
+// This means wercker errors on go get -u with version control not found.
+// The git clone goupdatebuild step in wercker.yml combined with the ssh-key for git access
+// solve this problem and are required for TestUpdatePackage() to function properly on wercker
 func TestUpdatePackage(t *testing.T) {
 
 	GOPATH := os.Getenv("GOPATH")
