@@ -94,6 +94,15 @@ func TestCheckDirForGo(t *testing.T) {
 	}
 }
 
-// func TestUpdatePackage(t *testing.T) {
+func TestUpdatePackage(t *testing.T) {
 
-// }
+	currentDirectory, err := os.Getwd()
+	if err != nil {
+		t.Error("An error occured trying to get current working directory,", err)
+	}
+
+	updated := UpdatePackage(currentDirectory)
+	if !updated {
+		t.Error("An error occured trying to update this Go package,", err)
+	}
+}
