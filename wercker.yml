@@ -9,6 +9,7 @@ build:
     - script:
         name: git clone goupdate
         code: |
+          cd ..
           rm -rf $GOPATH/src/github.com/ehabit/goupdate
           git clone git@github.com:ehabit/goupdate.git $GOPATH/src/github.com/ehabit/goupdate
 
