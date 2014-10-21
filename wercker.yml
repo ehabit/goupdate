@@ -1,2 +1,2 @@
-box: pjvds/golang
+box: wercker/golang
 no-response-timeout: 10
