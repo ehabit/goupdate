@@ -14,4 +14,4 @@ goupdate grabs your GOPATH from your environment and then runs through your libr
 
 ## Features
 + Updates Go packages hosted on github.com, bitbucket.org, code.google.com, and gopkg.in.
-+ Spins up 4 workers to parallelize package updates.
++ Spins up 4 workers to run package updates.
