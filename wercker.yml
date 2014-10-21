@@ -3,8 +3,8 @@ no-response-timeout: 10
 build:
   # The steps that will be executed on build
   steps:
-     - add-ssh-key:
-        keyname: GOUPDATE_KEY
+    - add-ssh-key:
+      keyname: GOUPDATE_KEY
     - setup-go-workspace
     - script:
         name: git clone goupdate
