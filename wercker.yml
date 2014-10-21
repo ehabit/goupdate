@@ -1,2 +1,33 @@
 box: wercker/golang
 no-response-timeout: 10
+build:
+  # The steps that will be executed on build
+  steps:
+    # Sets the go workspace and places you package
+    # at the right place in the workspace tree
+    - setup-go-workspace
+
+    # Gets the dependencies
+    - script:
+        name: go get
+        code: |
+          cd $WERCKER_SOURCE_DIR
+          go version
+          go get -t ./...
+
+    - script:
+      name: Clone github.com/ehabit/goupdate package
+      code: |-
+        git clone git@github.com:ehabit/goupdate.git $GOPATH/src/github.com/ehabit/goupdate
+
+    # Build the project
+    - script:
+        name: go build
+        code: |
+          go build ./...
+
+    # Test the project
+    - script:
+        name: go test
+        code: |
+          go test ./...
