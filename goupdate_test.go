@@ -94,11 +94,9 @@ func TestCheckDirForGo(t *testing.T) {
 	}
 }
 
-// wercker is throwing error on go get -u
-
-// From wercker:
-// Due to a bug in go get we cannot get the private package via ssh.
-// Until this is fixed we need to clone the repository ourself.
+// wercker manual remove and clone build step required for this test
+// wercker does need keep version control information on its cloned go packages by default
+// and errors on wercker go get -u without the git clone build step step
 func TestUpdatePackage(t *testing.T) {
 
 	GOPATH := os.Getenv("GOPATH")
