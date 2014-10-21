@@ -17,7 +17,7 @@ build:
 
     - script:
       name: Clone github.com/ehabit/goupdate package
-      code: |-
+      code: |
         git clone git@github.com:ehabit/goupdate.git $GOPATH/src/github.com/ehabit/goupdate
 
     # Build the project
