@@ -1,1 +1,2 @@
 box: pjvds/golang
+no-response-timeout: 10

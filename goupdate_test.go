@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/codeskyblue/go-sh"
 	"os"
 	"reflect"
 	"testing"
@@ -99,6 +100,10 @@ func TestUpdatePackage(t *testing.T) {
 
 	GOPATH := os.Getenv("GOPATH")
 	packPath := GOPATH + "/src/github.com/ehabit/goupdate"
+	err := sh.Command("go", "get", "github.com/ehabit/goupdate").Run()
+	if err != nil {
+		t.Error("An error occured tring to get github.com/ehabit/goupdate package for TestUpdatePackage()", err)
+	}
 	updated := UpdatePackage(packPath)
 	if !updated {
 		t.Error("An error occured trying to update this Go package,", packPath)
