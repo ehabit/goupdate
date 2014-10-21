@@ -6,6 +6,10 @@ build:
     # Sets the go workspace and places you package
     # at the right place in the workspace tree
     - setup-go-workspace
+    - script:
+        name: git clone goupdate
+        code: |
+          git clone git@github.com:ehabit/goupdate.git $GOPATH/src/github.com/ehabit/goupdate
 
     # Gets the dependencies
     - script:
@@ -14,11 +18,6 @@ build:
           cd $WERCKER_SOURCE_DIR
           go version
           go get -t ./...
-
-    - script:
-      name: Clone github.com/ehabit/goupdate package
-      code: |
-        git clone git@github.com:ehabit/goupdate.git $GOPATH/src/github.com/ehabit/goupdate
 
     # Build the project
     - script:
